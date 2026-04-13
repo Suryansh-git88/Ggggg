@@ -1,30 +1,29 @@
-import { createContext, useContext, useState, useCallback, useEffect } from 'react';
-import { getFavorites, addFavorite, removeFavorite, isFavorite as checkFavorite } from '../utils/storage';
+import { createContext, useContext, useState, useCallback } from 'react';
+import { getFavoriteEvents, addFavoriteEvent, removeFavoriteEvent, isEventFavorite, getFavoriteChannels, addFavoriteChannel, removeFavoriteChannel, isChannelFavorite } from '../utils/storage';
 
 const FavoritesContext = createContext();
 
 export function FavoritesProvider({ children }) {
-  const [favorites, setFavorites] = useState(() => getFavorites());
+  const [favEvents, setFavEvents] = useState(() => getFavoriteEvents());
+  const [favChannels, setFavChannels] = useState(() => getFavoriteChannels());
 
-  const refresh = useCallback(() => {
-    setFavorites(getFavorites());
+  const toggleEventFav = useCallback((event) => {
+    if (isEventFavorite(event.id)) { removeFavoriteEvent(event.id); }
+    else { addFavoriteEvent(event); }
+    setFavEvents(getFavoriteEvents());
   }, []);
 
-  const toggleFavorite = useCallback((match) => {
-    if (checkFavorite(match.id)) {
-      removeFavorite(match.id);
-    } else {
-      addFavorite(match);
-    }
-    refresh();
-  }, [refresh]);
+  const toggleChannelFav = useCallback((channel) => {
+    if (isChannelFavorite(channel.link)) { removeFavoriteChannel(channel.link); }
+    else { addFavoriteChannel(channel); }
+    setFavChannels(getFavoriteChannels());
+  }, []);
 
-  const isMatchFavorite = useCallback((matchId) => {
-    return favorites.some((f) => f.id === matchId);
-  }, [favorites]);
+  const isEvFav = useCallback((id) => favEvents.some((f) => f.id === id), [favEvents]);
+  const isChFav = useCallback((link) => favChannels.some((f) => f.link === link), [favChannels]);
 
   return (
-    <FavoritesContext.Provider value={{ favorites, toggleFavorite, isMatchFavorite, refresh }}>
+    <FavoritesContext.Provider value={{ favEvents, favChannels, toggleEventFav, toggleChannelFav, isEvFav, isChFav }}>
       {children}
     </FavoritesContext.Provider>
   );

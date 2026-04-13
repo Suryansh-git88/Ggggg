@@ -1,16 +1,10 @@
 import { useEffect, useRef } from 'react';
 
 export function useAutoRefresh(callback, intervalMs = 60000) {
-  const callbackRef = useRef(callback);
-
+  const cbRef = useRef(callback);
+  useEffect(() => { cbRef.current = callback; }, [callback]);
   useEffect(() => {
-    callbackRef.current = callback;
-  }, [callback]);
-
-  useEffect(() => {
-    const id = setInterval(() => {
-      callbackRef.current();
-    }, intervalMs);
+    const id = setInterval(() => cbRef.current(), intervalMs);
     return () => clearInterval(id);
   }, [intervalMs]);
 }

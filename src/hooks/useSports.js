@@ -1,5 +1,5 @@
-import { useState, useEffect } from 'react';
-import { api } from '../api/sportsrc';
+import { useState, useEffect, useCallback } from 'react';
+import { api } from '../api/topembed';
 
 export function useSports() {
   const [sports, setSports] = useState([]);
@@ -8,17 +8,10 @@ export function useSports() {
 
   useEffect(() => {
     let cancelled = false;
-    setLoading(true);
     api.getSports()
-      .then((data) => {
-        if (!cancelled) setSports(data || []);
-      })
-      .catch((err) => {
-        if (!cancelled) setError(err.message);
-      })
-      .finally(() => {
-        if (!cancelled) setLoading(false);
-      });
+      .then((data) => { if (!cancelled) setSports(data); })
+      .catch((err) => { if (!cancelled) setError(err.message); })
+      .finally(() => { if (!cancelled) setLoading(false); });
     return () => { cancelled = true; };
   }, []);
 

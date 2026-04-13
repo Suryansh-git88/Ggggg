@@ -4,22 +4,18 @@ const ThemeContext = createContext();
 
 export function ThemeProvider({ children }) {
   const [theme, setTheme] = useState(() => {
-    try {
-      return localStorage.getItem('sports_app_theme') || 'dark';
-    } catch {
-      return 'dark';
-    }
+    try { return localStorage.getItem('topembed_theme') || 'dark'; } catch { return 'dark'; }
   });
 
   useEffect(() => {
-    localStorage.setItem('sports_app_theme', theme);
+    localStorage.setItem('topembed_theme', theme);
     document.documentElement.classList.toggle('dark', theme === 'dark');
   }, [theme]);
 
   const toggleTheme = () => setTheme((t) => (t === 'dark' ? 'light' : 'dark'));
 
   return (
-    <ThemeContext.Provider value={{ theme, toggleTheme }}>
+    <ThemeContext.Provider value={{ theme, toggleTheme, isDark: theme === 'dark' }}>
       {children}
     </ThemeContext.Provider>
   );

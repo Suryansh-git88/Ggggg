@@ -1,11 +1,11 @@
 {
-  "name": "SportStream",
-  "short_name": "SportStream",
-  "description": "Live sports streaming for football, cricket, basketball, tennis and more",
+  "name": "StreamHub",
+  "short_name": "StreamHub",
+  "description": "Watch 1500+ live sports events and 440+ TV channels",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#0f172a",
-  "theme_color": "#0f172a",
+  "background_color": "#0a0a0f",
+  "theme_color": "#0a0a0f",
   "orientation": "any",
   "icons": [
     {

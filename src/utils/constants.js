@@ -1,28 +1,18 @@
-export const SPORTS = [
-  { id: 'football', name: 'Football', emoji: '⚽', color: '#22c55e' },
-  { id: 'cricket', name: 'Cricket', emoji: '🏏', color: '#f59e0b' },
-  { id: 'basketball', name: 'Basketball', emoji: '🏀', color: '#f97316' },
-  { id: 'tennis', name: 'Tennis', emoji: '🎾', color: '#84cc16' },
-  { id: 'hockey', name: 'Ice Hockey', emoji: '🏒', color: '#06b6d4' },
-  { id: 'fight', name: 'UFC / Boxing', emoji: '🥊', color: '#ef4444' },
-  { id: 'baseball', name: 'Baseball', emoji: '⚾', color: '#dc2626' },
-  { id: 'rugby', name: 'Rugby', emoji: '🏉', color: '#7c3aed' },
-  { id: 'golf', name: 'Golf', emoji: '⛳', color: '#16a34a' },
-  { id: 'motor-sports', name: 'Motor Sports', emoji: '🏎️', color: '#e11d48' },
-  { id: 'darts', name: 'Darts', emoji: '🎯', color: '#0891b2' },
-  { id: 'afl', name: 'AFL', emoji: '🏈', color: '#4f46e5' },
-  { id: 'billiards', name: 'Billiards', emoji: '🎱', color: '#1e293b' },
-  { id: 'other', name: 'Other', emoji: '🏅', color: '#6b7280' },
+export const POPULAR_LEAGUES = [
+  'Premier League', 'Champions League', 'La Liga', 'Serie A', 'Bundesliga',
+  'Indian Premier League', 'NBA', 'NFL', 'UFC', 'Formula 1',
 ];
 
-export const HEAT_TIER_COLORS = {
-  veryhigh: '#ef4444',
-  high: '#f97316',
-  medium: '#eab308',
-  low: '#22c55e',
-  none: '#6b7280',
+export const SPORT_COLORS = {
+  Football: '#22c55e', Basketball: '#f97316', Cricket: '#f59e0b',
+  Tennis: '#84cc16', 'Ice Hockey': '#06b6d4', Boxing: '#ef4444',
+  UFC: '#dc2626', MMA: '#dc2626', NFL: '#7c3aed', Baseball: '#e11d48',
+  Rugby: '#8b5cf6', Golf: '#16a34a', Motorsport: '#e11d48',
+  Darts: '#0891b2', Handball: '#f472b6', Volleyball: '#a855f7',
+  Snooker: '#1e293b', Wrestling: '#b45309', Cycling: '#059669',
+  default: '#6b7280',
 };
 
-export function getSportById(id) {
-  return SPORTS.find((s) => s.id === id) || { id, name: id, emoji: '🏅', color: '#6b7280' };
+export function getSportColor(sportName) {
+  return SPORT_COLORS[sportName] || SPORT_COLORS.default;
 }
